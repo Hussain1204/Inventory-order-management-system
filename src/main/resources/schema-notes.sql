@@ -1,0 +1,6 @@
+-- Optional reference schema notes (Hibernate creates tables automatically with ddl-auto=update).
+-- Indexing rationale:
+-- products(category, name): speeds up category/name filtering for catalog pages.
+-- products(quantity): low-stock checks are frequent dashboard queries.
+-- orders(customer_id, status): faster order history and status tracking.
+-- users(username), roles(name), customers(email): unique lookups for login/business validation.

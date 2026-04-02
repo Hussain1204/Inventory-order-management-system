@@ -68,6 +68,27 @@ Use returned JWT token from `/auth/login` in Swagger using Bearer auth.
 - `@EntityGraph` is used in order repository to avoid N+1 query issues when fetching order details.
 
 ## Run Locally
+### Option A (quick start, no MySQL required)
+1. Run with default profile (H2 in-memory DB):
+   ```bash
+   mvn spring-boot:run
+   ```
+2. Open Swagger UI:
+   - `http://localhost:8080/swagger-ui.html`
+3. (Optional) H2 console:
+   - `http://localhost:8080/h2-console`
+
+### Option B (MySQL profile)
+1. Create MySQL database (or let URL create it automatically).
+2. Set DB credentials as environment variables or use defaults:
+   - `DB_URL`
+   - `DB_USERNAME`
+   - `DB_PASSWORD`
+3. Run with MySQL profile:
+   ```bash
+   mvn spring-boot:run -Dspring-boot.run.profiles=mysql
+   ```
+4. If you see `Access denied for user 'root'@'localhost'`, your local MySQL password does not match `DB_PASSWORD`.
 1. Create MySQL database or let URL create automatically.
 2. Update `src/main/resources/application.yml` credentials if needed.
 3. Run:

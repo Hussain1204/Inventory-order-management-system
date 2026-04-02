@@ -1,8 +1,12 @@
 spring:
   datasource:
+    url: jdbc:h2:mem:inventory_db;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
     url: jdbc:mysql://localhost:3306/inventory_db?createDatabaseIfNotExist=true
     username: root
-    password: root
+    password: Hussain@1204
   jpa:
     hibernate:
       ddl-auto: update
@@ -10,12 +14,18 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
   jackson:
     serialization:
       write-dates-as-timestamps: false
 
 app:
   jwt:
+    secret: ${JWT_SECRET:1234567890123456789012345678901234567890123456789012345678901234}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
     secret: 1234567890123456789012345678901234567890123456789012345678901234
     expiration-ms: 86400000
 

@@ -13,6 +13,7 @@ Production-ready backend project for managing products, customers, and orders wi
 ## Layered Architecture
 ```
 com.hussain.inventory
+com.example.inventory
 ├── config
 ├── controller
 ├── dto

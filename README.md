@@ -13,6 +13,7 @@ Production-ready backend project for managing products, customers, and orders wi
 ## Layered Architecture
 ```
 com.hussain.inventory
+com.example.inventory
 ├── config
 ├── controller
 ├── dto
@@ -88,6 +89,14 @@ Use returned JWT token from `/auth/login` in Swagger using Bearer auth.
    mvn spring-boot:run -Dspring-boot.run.profiles=mysql
    ```
 4. If you see `Access denied for user 'root'@'localhost'`, your local MySQL password does not match `DB_PASSWORD`.
+1. Create MySQL database or let URL create automatically.
+2. Update `src/main/resources/application.yml` credentials if needed.
+3. Run:
+   ```bash
+   mvn spring-boot:run
+   ```
+4. Open Swagger UI:
+   - `http://localhost:8080/swagger-ui.html`
 
 ## Testing
 Run unit tests:

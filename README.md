@@ -89,6 +89,18 @@ Use returned JWT token from `/auth/login` in Swagger using Bearer auth.
    ```
 4. If you see `Access denied for user 'root'@'localhost'`, your local MySQL password does not match `DB_PASSWORD`.
 
+
+### If you pulled new code and see merge/build issues
+1. Delete local generated folders/files:
+   - `target/`
+   - `.classpath`, `.project`, `.settings/` (if present)
+2. Re-import the project in Eclipse as **Existing Maven Project**.
+3. Run:
+   ```bash
+   mvn clean
+   mvn spring-boot:run
+   ```
+
 ## Testing
 Run unit tests:
 ```bash

@@ -4,9 +4,6 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-    url: jdbc:mysql://localhost:3306/inventory_db?createDatabaseIfNotExist=true
-    username: root
-    password: Hussain@1204
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,10 +21,8 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:1234567890123456789012345678901234567890123456789012345678901234}
+    secret: ${JWT_SECRET:change-me-in-production-use-env-var}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
-    secret: 1234567890123456789012345678901234567890123456789012345678901234
-    expiration-ms: 86400000
 
 springdoc:
   swagger-ui:

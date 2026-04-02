@@ -13,7 +13,6 @@ Production-ready backend project for managing products, customers, and orders wi
 ## Layered Architecture
 ```
 com.hussain.inventory
-com.example.inventory
 ├── config
 ├── controller
 ├── dto
@@ -62,14 +61,19 @@ com.example.inventory
 
 Use returned JWT token from `/auth/login` in Swagger using Bearer auth.
 
+**⚠️ Important:** Demo credentials are for local development only. Replace with secure credentials in production.
+
 ## Database Notes
 - Entities are normalized: Product, Customer, OrderEntity, OrderItem, AppUser, Role.
 - Indexes are defined at entity-level (`@Table(indexes = ...)`) for frequent lookup paths.
 - `@EntityGraph` is used in order repository to avoid N+1 query issues when fetching order details.
 
 ## Run Locally
-### Option A (quick start, no MySQL required)
-1. Run with default profile (H2 in-memory DB):
+
+### Option A (Quick Start - H2 In-Memory Database)
+No MySQL required. Perfect for development and testing.
+
+1. Run with default profile (uses H2):
    ```bash
    mvn spring-boot:run
    ```
@@ -78,25 +82,37 @@ Use returned JWT token from `/auth/login` in Swagger using Bearer auth.
 3. (Optional) H2 console:
    - `http://localhost:8080/h2-console`
 
-### Option B (MySQL profile)
-1. Create MySQL database (or let URL create it automatically).
-2. Set DB credentials as environment variables or use defaults:
-   - `DB_URL`
-   - `DB_USERNAME`
-   - `DB_PASSWORD`
+### Option B (MySQL Profile)
+For production-like testing with a real MySQL database.
+
+1. Ensure MySQL is running locally (or update `DB_URL` accordingly).
+2. Set environment variables:
+   ```bash
+   export DB_URL=jdbc:mysql://localhost:3306/inventory_db?createDatabaseIfNotExist=true&useSSL=false
+   export DB_USERNAME=root
+   export DB_PASSWORD=your_mysql_password
+   export JWT_SECRET=your-super-secret-jwt-key-min-64-chars-long-replace-me-in-production
+   ```
 3. Run with MySQL profile:
    ```bash
    mvn spring-boot:run -Dspring-boot.run.profiles=mysql
    ```
-4. If you see `Access denied for user 'root'@'localhost'`, your local MySQL password does not match `DB_PASSWORD`.
-1. Create MySQL database or let URL create automatically.
-2. Update `src/main/resources/application.yml` credentials if needed.
-3. Run:
-   ```bash
-   mvn spring-boot:run
-   ```
 4. Open Swagger UI:
    - `http://localhost:8080/swagger-ui.html`
+
+### Troubleshooting
+- **"Access denied for user 'root'@'localhost'"**: Your MySQL password doesn't match `DB_PASSWORD` env var.
+- **Port 8080 already in use**: Change port via `java -jar target/*.jar --server.port=8081`
+
+## Environment Variables (Production)
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `JWT_SECRET` | ✅ Yes | N/A | Secret key for signing JWTs (min 64 chars) |
+| `JWT_EXPIRATION_MS` | ❌ No | 86400000 | JWT expiration in milliseconds (24 hours) |
+| `DB_URL` | For MySQL | H2 in-memory | JDBC URL for database connection |
+| `DB_USERNAME` | For MySQL | N/A | Database username |
+| `DB_PASSWORD` | For MySQL | N/A | Database password |
 
 ## Testing
 Run unit tests:
